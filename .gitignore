@@ -1,0 +1,9 @@
+target
+.project
+.settings
+.classpath
+.metadata
+.DS_Store
+*.class
+*.txt
+*.lst
