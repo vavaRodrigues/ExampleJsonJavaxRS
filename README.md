@@ -1,3 +1,3 @@
 # ExampleJsonJavaxRS
 
-Exemplo utilizando jersy
+Exemplo utilizando jersey
