@@ -1,0 +1,3 @@
+# ExampleJsonJavaxRS
+
+Exemplo utilizando jersy
