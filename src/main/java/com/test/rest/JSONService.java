@@ -26,9 +26,7 @@ public class JSONService {
 		track.add(new Track("Enter Sandman","Metallica"));
 		track.add(new Track("The Unforgiven","Metallica"));
 
-		ArrayList<Track> track2 = (ArrayList<Track>) track.clone();
-
-		return track2;
+		return track;
 
 	}
 
