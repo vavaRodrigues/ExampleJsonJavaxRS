@@ -9,6 +9,9 @@ public class Track implements Serializable {
 	String singer;
 	
 	
+	public Track(){
+	}
+	
 	public Track(String title, String singer){
 		this.title = title;
 		this.singer = singer;
