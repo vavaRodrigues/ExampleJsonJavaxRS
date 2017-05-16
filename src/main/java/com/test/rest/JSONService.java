@@ -8,14 +8,18 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import com.test.Music;
 import com.test.Track;
 
 @Path("/json/music")
 public class JSONService {
+	@Context
+	UriInfo uri;
 
 	@GET
 	@Path("/get")
@@ -43,6 +47,26 @@ public class JSONService {
 		
 		return Response.status(201).entity(result).build();
 		
+	}
+	
+	@GET
+	@Path("/url")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response Teste() {
+		
+		StringBuilder fullPath = new StringBuilder();
+		fullPath.append(uri.getPath());
+		fullPath.append("?");
+		for (String key : uri.getQueryParameters().keySet()) {
+			fullPath.append(key + "=" + uri.getQueryParameters().getFirst(key));
+			fullPath.append("&");
+		}
+		
+		
+		System.out.println("teste");
+
+		return Response.status(201).entity("OK").build();
+
 	}
 	
 }
