@@ -15,7 +15,7 @@ public class CreateEnvironmentDTO {
 	private String productVersion;
 	
 	@JsonProperty("product_id")
-	private String productId;
+	private int productId;
 	
 	@JsonProperty("provider_params")
 	private ProviderParams providerParams;
@@ -49,11 +49,11 @@ public class CreateEnvironmentDTO {
 		this.productVersion = productVersion;
 	}
 
-	public String getProductId() {
+	public int getProductId() {
 		return productId;
 	}
 
-	public void setProductId(String productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 

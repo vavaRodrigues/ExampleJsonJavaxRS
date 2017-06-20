@@ -1,6 +1,5 @@
 package com.test.dto;
 
-
 public class Stages {
 	private Production production;
 
@@ -12,6 +11,11 @@ public class Stages {
 		this.production = production;
 	}
 
+	public Stages(Production production) {
+		super();
+		this.production = production;
+	}
+	
 	@Override
 	public String toString() {
 		return "Stages [production=" + production + "]";

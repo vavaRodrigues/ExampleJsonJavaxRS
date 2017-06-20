@@ -1,6 +1,5 @@
 package com.test.dto;
 
-
 import java.util.Arrays;
 
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -8,30 +7,30 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class Simulation {
 	@JsonProperty("billing_type")
 	private String billingType;
-	
+
 	@JsonProperty("cost_alert")
 	private String costAlert;
-	
+
 	@JsonProperty("scaling_type")
 	private String scalingType;
-	
+
 	@JsonProperty("max_number_of_devices")
 	private String maxNumberOfDevices;
-	
+
 	@JsonProperty("additional_capacity")
 	private String additionalCapacity;
-	
+
 	@JsonProperty("alert_enabled")
 	private String alertEnabled;
-	
+
 	private Stages stages;
-	
+
 	@JsonProperty("additional_capacity_days")
 	private String[] additionalCapacityDays;
-	
+
 	@JsonProperty("segment_factor_number")
 	private String segmentFactorNumber;
-	
+
 	@JsonProperty("number_of_devices")
 	private String numberOfDevices;
 
@@ -115,6 +114,22 @@ public class Simulation {
 		this.numberOfDevices = numberOfDevices;
 	}
 
+	public Simulation(String billingType, String costAlert, String scalingType, String maxNumberOfDevices,
+			String additionalCapacity, String alertEnabled, Stages stages, String[] additionalCapacityDays,
+			String segmentFactorNumber, String numberOfDevices) {
+		super();
+		this.billingType = billingType;
+		this.costAlert = costAlert;
+		this.scalingType = scalingType;
+		this.maxNumberOfDevices = maxNumberOfDevices;
+		this.additionalCapacity = additionalCapacity;
+		this.alertEnabled = alertEnabled;
+		this.stages = stages;
+		this.additionalCapacityDays = additionalCapacityDays;
+		this.segmentFactorNumber = segmentFactorNumber;
+		this.numberOfDevices = numberOfDevices;
+	}
+
 	@Override
 	public String toString() {
 		return "Simulation [billingType=" + billingType + ", costAlert=" + costAlert + ", scalingType=" + scalingType
@@ -124,5 +139,4 @@ public class Simulation {
 				+ ", numberOfDevices=" + numberOfDevices + "]";
 	}
 
-	
 }

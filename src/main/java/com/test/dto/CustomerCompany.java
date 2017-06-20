@@ -36,6 +36,13 @@ public class CustomerCompany {
 		this.corporateName = corporateName;
 	}
 
+	public CustomerCompany(String federalId, String email, String corporateName) {
+		super();
+		this.federalId = federalId;
+		this.email = email;
+		this.corporateName = corporateName;
+	}
+
 	@Override
 	public String toString() {
 		return "CustomerCompany [federalId=" + federalId + ", email=" + email + ", corporateName=" + corporateName

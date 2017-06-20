@@ -1,6 +1,5 @@
 package com.test.dto;
 
-
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class ProviderParams {
@@ -12,6 +11,11 @@ public class ProviderParams {
 	}
 
 	public void setTotvsCloudProjectId(String totvsCloudProjectId) {
+		this.totvsCloudProjectId = totvsCloudProjectId;
+	}
+
+	public ProviderParams(String totvsCloudProjectId) {
+		super();
 		this.totvsCloudProjectId = totvsCloudProjectId;
 	}
 

@@ -8,7 +8,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class Production {
 
 	@JsonProperty("working_hours")
-	private WorkingHours workingHours;
+	private WorkingHoursEnvironment workingHours;
 
 	@JsonProperty("max_core_instance_elastic")
 	private String maxCoreInstanceElastic;
@@ -29,11 +29,11 @@ public class Production {
 
 	private Instances[] instances;
 
-	public WorkingHours getWorkingHours() {
+	public WorkingHoursEnvironment getWorkingHours() {
 		return workingHours;
 	}
 
-	public void setWorkingHours(WorkingHours workingHours) {
+	public void setWorkingHours(WorkingHoursEnvironment workingHours) {
 		this.workingHours = workingHours;
 	}
 
@@ -90,6 +90,20 @@ public class Production {
 	}
 
 	public void setInstances(Instances[] instances) {
+		this.instances = instances;
+	}
+	
+	
+	public Production(WorkingHoursEnvironment workingHours, String maxCoreInstanceElastic, String maxInstances, WarmUps warmUps,
+			String[] scalingInstances, String maxCoreServiceElastic, Databases[] databases, Instances[] instances) {
+		super();
+		this.workingHours = workingHours;
+		this.maxCoreInstanceElastic = maxCoreInstanceElastic;
+		this.maxInstances = maxInstances;
+		this.warmUps = warmUps;
+		this.scalingInstances = scalingInstances;
+		this.maxCoreServiceElastic = maxCoreServiceElastic;
+		this.databases = databases;
 		this.instances = instances;
 	}
 
