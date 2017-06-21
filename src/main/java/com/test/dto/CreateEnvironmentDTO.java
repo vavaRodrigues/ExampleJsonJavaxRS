@@ -1,8 +1,11 @@
 package com.test.dto;
 
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+@JsonAutoDetect(fieldVisibility=JsonAutoDetect.Visibility.ANY, getterVisibility=JsonAutoDetect.Visibility.NONE,
+setterVisibility=JsonAutoDetect.Visibility.NONE, creatorVisibility=JsonAutoDetect.Visibility.NONE)
 public class CreateEnvironmentDTO {
 	
 	@JsonProperty("product_params")
@@ -80,12 +83,4 @@ public class CreateEnvironmentDTO {
 	public void setProviderName(String providerName) {
 		this.providerName = providerName;
 	}
-
-	@Override
-	public String toString() {
-		return "CreateEnvironmentDTO [productParams=" + productParams + ", customerCompany=" + customerCompany
-				+ ", productVersion=" + productVersion + ", productId=" + productId + ", providerParams="
-				+ providerParams + ", simulation=" + simulation + ", providerName=" + providerName + "]";
-	}
-
 }

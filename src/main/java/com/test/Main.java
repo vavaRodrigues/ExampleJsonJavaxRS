@@ -16,9 +16,9 @@ import com.test.dto.ProviderParams;
 import com.test.dto.Simulation;
 import com.test.dto.Stages;
 import com.test.dto.Storages;
+import com.test.dto.Tags;
 import com.test.dto.WarmUps;
 import com.test.dto.WorkingHoursEnvironment;
-import com.test.simulador.dto.Manifest;
 import com.test.simulador.dto.RampupHours;
 import com.test.simulador.dto.SimulationDTO;
 import com.test.simulador.dto.WorkingHours;
@@ -27,7 +27,7 @@ public class Main {
 	
 	
 	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException {
-		
+		/*
 		String json = "{" +
 				"	\"id\": 6783," +
 				"	\"segment_factor_number\": 1.0," +
@@ -205,7 +205,6 @@ public class Main {
 		createEnvironmentDTO.setProviderParams(new ProviderParams("cloudAccountId"));
 		
 		String[] additionalCapacityDays = new String[1];
-		Manifest[] manifest = simulation.getManifest();
  		WorkingHours[] workingHours = simulation.getWorkingHours();
  		RampupHours[] rampupHours = simulation.getRampupHours();
 		WorkingHoursEnvironment workingHoursEnvironment = new WorkingHoursEnvironment(workingHours[0].getHours().getWed()
@@ -225,9 +224,15 @@ public class Main {
 				                     , rampupHours[0].getHours().getSat()
 				                     , rampupHours[0].getHours().getSun());
 		
-		Storages[] storages = new Storages[1];
+		
 		DatabasesEnvironment[] databasesEnvironment = new DatabasesEnvironment[1];
+		databasesEnvironment[0] = new DatabasesEnvironment(new Tags("database"),"sqlserver","jis.database.medium_a","75");
+		
+		Storages[] storages = new Storages[1];
+		storages[0] = new Storages(new Tags("so"),"false","jis.storage.ssd_a","10");
 		InstancesEnvironment[] instancesEnvironment = new InstancesEnvironment[1];
+		instancesEnvironment[0] = new InstancesEnvironment(new Tags("core_instance"),storages,"jis.instance.medium_a");
+		
 		String[] scalingInstances = new String[1];
 		
 		Production production = new Production(workingHoursEnvironment
@@ -256,18 +261,20 @@ public class Main {
 		createEnvironmentDTO.setSimulation(simulationDTO);
 		
 		
-		System.out.println(createEnvironmentDTO.toString());
+		System.out.println("object: "+createEnvironmentDTO.toString());
 		String jsonInString = mapper.writeValueAsString(createEnvironmentDTO);
+		jsonInString.replaceFirst("product_id", "productId");
+		System.out.println("json: "+jsonInString);
 		byte[] envCreationBody = jsonInString.getBytes();
-		System.out.println(envCreationBody);
+		System.out.println("byte: "+envCreationBody);
 		
 		//System.out.println(simulation.toString());
 		//String jsonInString = mapper.writeValueAsString(simulation);
 		//System.out.println(jsonInString);
 		 
+		*/
 		
-		
-		
+		create_environment();
 		
 
 	}
