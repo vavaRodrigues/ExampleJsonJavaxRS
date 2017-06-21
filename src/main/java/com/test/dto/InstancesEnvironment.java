@@ -1,9 +1,8 @@
 package com.test.dto;
 
-
 import java.util.Arrays;
 
-public class Instances {
+public class InstancesEnvironment {
 	private Tags tags;
 
 	private Storages[] storages;
@@ -31,6 +30,13 @@ public class Instances {
 	}
 
 	public void setFlavour(String flavour) {
+		this.flavour = flavour;
+	}
+
+	public InstancesEnvironment(Tags tags, Storages[] storages, String flavour) {
+		super();
+		this.tags = tags;
+		this.storages = storages;
 		this.flavour = flavour;
 	}
 

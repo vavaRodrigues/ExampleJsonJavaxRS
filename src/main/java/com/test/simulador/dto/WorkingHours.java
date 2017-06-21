@@ -22,12 +22,6 @@ public class WorkingHours {
 		this.stage = stage;
 	}
 
-	public WorkingHours(Hours hours, String stage) {
-		super();
-		this.hours = hours;
-		this.stage = stage;
-	}
-
 	@Override
 	public String toString() {
 		return "WorkingHours [hours=" + hours + ", stage=" + stage + "]";

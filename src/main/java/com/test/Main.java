@@ -10,20 +10,27 @@ import org.codehaus.jettison.json.JSONException;
 
 import com.test.dto.CreateEnvironmentDTO;
 import com.test.dto.CustomerCompany;
+import com.test.dto.DatabasesEnvironment;
+import com.test.dto.InstancesEnvironment;
 import com.test.dto.Production;
 import com.test.dto.ProviderParams;
 import com.test.dto.Simulation;
 import com.test.dto.Stages;
+import com.test.dto.Storages;
+import com.test.dto.Tags;
+import com.test.dto.WarmUps;
 import com.test.dto.WorkingHoursEnvironment;
 import com.test.simulador.dto.Hours;
+import com.test.simulador.dto.Instances;
 import com.test.simulador.dto.Manifest;
+import com.test.simulador.dto.RampupHours;
 import com.test.simulador.dto.SimulationDTO;
 import com.test.simulador.dto.WorkingHours;
 
 public class Main {
 	
 	
-	public static void main(String args[]) throws JsonParseException, JsonMappingException, IOException, JSONException {
+	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException {
 		
 		String json = "{" +
 				"	\"id\": 6783," +
@@ -191,7 +198,19 @@ public class Main {
 		
 		
 		ObjectMapper mapper = new ObjectMapper();
-		SimulationDTO simulation = mapper.readValue(json, SimulationDTO.class);
+		SimulationDTO simulation = null;
+		try {
+			simulation = mapper.readValue(json, SimulationDTO.class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException 	e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		CreateEnvironmentDTO createEnvironmentDTO = new CreateEnvironmentDTO();
 		createEnvironmentDTO.setProductId(simulation.getProduct().getId());
@@ -202,18 +221,45 @@ public class Main {
 		String[] additionalCapacityDays = new String[1];
 		Manifest[] manifest = simulation.getManifest();
  		WorkingHours[] workingHours = simulation.getWorkingHours();
- 		
-		WorkingHoursEnvironment workingHoursEnvironment = 	new WorkingHoursEnvironment(workingHours[0].getHours().getWed()
+ 		RampupHours[] rampupHours = simulation.getRampupHours();
+		WorkingHoursEnvironment workingHoursEnvironment = new WorkingHoursEnvironment(workingHours[0].getHours().getWed()
 				                                                                       , workingHours[0].getHours().getFri()
 				                                                                       , workingHours[0].getHours().getMon()
 				                                                                       , workingHours[0].getHours().getSat()
 				                                                                       , workingHours[0].getHours().getSun()
 				                                                                       , workingHours[0].getHours().getThu()
 				                                                                       , workingHours[0].getHours().getTue());
-		Production production = new Production(workingHoursEnvironment, "maxCoreInstanceElastic", "maxInstances", "warmUps", "scalingInstances", "maxCoreServiceElastic", "databases", "instances");
+		
+		
+		WarmUps warmUps = new WarmUps(rampupHours[0].getHours().getMon()
+				                     , rampupHours[0].getHours().getTue()
+				                     , rampupHours[0].getHours().getWed()
+				                     , rampupHours[0].getHours().getThu()
+				                     , rampupHours[0].getHours().getFri()
+				                     , rampupHours[0].getHours().getSat()
+				                     , rampupHours[0].getHours().getSun());
+		
+		Storages[] storages = new Storages[1];
+		DatabasesEnvironment[] databasesEnvironment = new DatabasesEnvironment[1];
+		InstancesEnvironment[] instancesEnvironment = new InstancesEnvironment[1];
+		String[] scalingInstances = new String[1];
+		
+		Production production = new Production(workingHoursEnvironment
+				                              , "maxCoreInstanceElastic"
+				                              , "maxInstances"
+				                              , warmUps
+				                              , scalingInstances
+				                              , "maxCoreServiceElastic"
+				                              , databasesEnvironment
+				                              , instancesEnvironment);
 		
 		createEnvironmentDTO.setSimulation(new Simulation("billingType", "costAlert", "scalingType", "maxNumberOfDevices", "additionalCapacity", "alertEnabled", new Stages(production), additionalCapacityDays, "segmentFactorNumber", "numberOfDevices"));
-	
+		
+		
+		System.out.println(createEnvironmentDTO.toString());
+		String jsonInString = mapper.writeValueAsString(createEnvironmentDTO);
+		System.out.println(jsonInString);
+		
 		//System.out.println(simulation.toString());
 		//String jsonInString = mapper.writeValueAsString(simulation);
 		//System.out.println(jsonInString);

@@ -15,6 +15,11 @@ public class Tags {
 		this.configurationType = configurationType;
 	}
 
+	public Tags(String configurationType) {
+		super();
+		this.configurationType = configurationType;
+	}
+
 	@Override
 	public String toString() {
 		return "Tags [configurationType=" + configurationType + "]";

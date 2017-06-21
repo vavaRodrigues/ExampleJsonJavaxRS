@@ -1,9 +1,8 @@
 package com.test.dto;
 
-
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class Databases {
+public class DatabasesEnvironment {
 	private Tags tags;
 
 	private String engine;
@@ -42,6 +41,14 @@ public class Databases {
 	}
 
 	public void setFlavour(String flavour) {
+		this.flavour = flavour;
+	}
+
+	public DatabasesEnvironment(Tags tags, String engine, String storageSize, String flavour) {
+		super();
+		this.tags = tags;
+		this.engine = engine;
+		this.storageSize = storageSize;
 		this.flavour = flavour;
 	}
 

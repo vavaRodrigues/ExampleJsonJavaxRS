@@ -25,9 +25,9 @@ public class Production {
 	@JsonProperty("max_core_service_elastic")
 	private String maxCoreServiceElastic;
 
-	private Databases[] databases;
+	private DatabasesEnvironment[] databases;
 
-	private Instances[] instances;
+	private InstancesEnvironment[] instances;
 
 	public WorkingHoursEnvironment getWorkingHours() {
 		return workingHours;
@@ -77,25 +77,27 @@ public class Production {
 		this.maxCoreServiceElastic = maxCoreServiceElastic;
 	}
 
-	public Databases[] getDatabases() {
+	public DatabasesEnvironment[] getDatabases() {
 		return databases;
 	}
 
-	public void setDatabases(Databases[] databases) {
+	public void setDatabases(DatabasesEnvironment[] databases) {
 		this.databases = databases;
 	}
 
-	public Instances[] getInstances() {
+	public InstancesEnvironment[] getInstances() {
 		return instances;
 	}
 
-	public void setInstances(Instances[] instances) {
+	public void setInstances(InstancesEnvironment[] instances) {
 		this.instances = instances;
 	}
 	
 	
-	public Production(WorkingHoursEnvironment workingHours, String maxCoreInstanceElastic, String maxInstances, WarmUps warmUps,
-			String[] scalingInstances, String maxCoreServiceElastic, Databases[] databases, Instances[] instances) {
+
+	public Production(WorkingHoursEnvironment workingHours, String maxCoreInstanceElastic, String maxInstances,
+			WarmUps warmUps, String[] scalingInstances, String maxCoreServiceElastic, DatabasesEnvironment[] databases,
+			InstancesEnvironment[] instances) {
 		super();
 		this.workingHours = workingHours;
 		this.maxCoreInstanceElastic = maxCoreInstanceElastic;

@@ -42,7 +42,7 @@ public class SimulationDTO {
 	private String connections;
 
 	@JsonProperty("rampup_hours")
-	private RampupHours[] rampup_hours;
+	private RampupHours[] rampupHours;
 
 	@JsonProperty("segment_factor_number")
 	private String segmentFactorNumber;
@@ -215,12 +215,12 @@ public class SimulationDTO {
 		this.connections = connections;
 	}
 
-	public RampupHours[] getRampup_hours() {
-		return rampup_hours;
+	public RampupHours[] getRampupHours() {
+		return rampupHours;
 	}
 
-	public void setRampup_hours(RampupHours[] rampup_hours) {
-		this.rampup_hours = rampup_hours;
+	public void setRampupHours(RampupHours[] rampupHours) {
+		this.rampupHours = rampupHours;
 	}
 
 	public String getSegmentFactorNumber() {
@@ -382,7 +382,7 @@ public class SimulationDTO {
 				+ Arrays.toString(manifest) + ", sourceType=" + sourceType + ", instances=" + instances + ", type="
 				+ type + ", contact=" + contact + ", id=" + id + ", approved=" + approved + ", advanced=" + advanced
 				+ ", in_use=" + in_use + ", created_at=" + created_at + ", connections=" + connections
-				+ ", rampup_hours=" + Arrays.toString(rampup_hours) + ", segmentFactorNumber=" + segmentFactorNumber
+				+ ", rampupHours=" + Arrays.toString(rampupHours) + ", segmentFactorNumber=" + segmentFactorNumber
 				+ ", services=" + Arrays.toString(services) + ", support=" + support + ", productVersion="
 				+ productVersion + ", reviewable=" + reviewable + ", provider=" + provider + ", available=" + available
 				+ ", currentStatus=" + currentStatus + ", stages=" + Arrays.toString(stages) + ", database=" + database

@@ -74,17 +74,6 @@ public class Hours {
 		this.fri = fri;
 	}
 
-	public Hours(String[] sat, String[] thu, String[] wed, String[] mon, String[] tue, String[] sun, String[] fri) {
-		super();
-		this.sat = sat;
-		this.thu = thu;
-		this.wed = wed;
-		this.mon = mon;
-		this.tue = tue;
-		this.sun = sun;
-		this.fri = fri;
-	}
-
 	@Override
 	public String toString() {
 		return "Hours [sat=" + Arrays.toString(sat) + ", thu=" + Arrays.toString(thu) + ", wed=" + Arrays.toString(wed)

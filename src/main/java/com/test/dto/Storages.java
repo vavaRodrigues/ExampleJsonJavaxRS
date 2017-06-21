@@ -1,6 +1,5 @@
 package com.test.dto;
 
-
 public class Storages {
 	private Tags tags;
 
@@ -39,6 +38,14 @@ public class Storages {
 	}
 
 	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public Storages(Tags tags, String additional, String type, String size) {
+		super();
+		this.tags = tags;
+		this.additional = additional;
+		this.type = type;
 		this.size = size;
 	}
 
