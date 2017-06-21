@@ -13,6 +13,9 @@ public class ProviderParams {
 	public void setTotvsCloudProjectId(String totvsCloudProjectId) {
 		this.totvsCloudProjectId = totvsCloudProjectId;
 	}
+	
+	public ProviderParams() {
+	}
 
 	public ProviderParams(String totvsCloudProjectId) {
 		super();

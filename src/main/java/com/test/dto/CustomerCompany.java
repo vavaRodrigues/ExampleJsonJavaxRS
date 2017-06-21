@@ -35,6 +35,9 @@ public class CustomerCompany {
 	public void setCorporateName(String corporateName) {
 		this.corporateName = corporateName;
 	}
+	
+	public CustomerCompany() {
+	}
 
 	public CustomerCompany(String federalId, String email, String corporateName) {
 		super();

@@ -72,7 +72,10 @@ public class WorkingHoursEnvironment {
 	public void setTer(String[] ter) {
 		this.ter = ter;
 	}
-
+	
+	public WorkingHoursEnvironment() {
+	}
+	
 	public WorkingHoursEnvironment(String[] qua, String[] sex, String[] seg, String[] sab, String[] dom, String[] qui,
 			String[] ter) {
 		super();

@@ -43,6 +43,9 @@ public class DatabasesEnvironment {
 	public void setFlavour(String flavour) {
 		this.flavour = flavour;
 	}
+	
+	public DatabasesEnvironment() {
+	}
 
 	public DatabasesEnvironment(Tags tags, String engine, String storageSize, String flavour) {
 		super();

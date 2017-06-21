@@ -93,7 +93,8 @@ public class Production {
 		this.instances = instances;
 	}
 	
-	
+	public Production() {
+	}
 
 	public Production(WorkingHoursEnvironment workingHours, String maxCoreInstanceElastic, String maxInstances,
 			WarmUps warmUps, String[] scalingInstances, String maxCoreServiceElastic, DatabasesEnvironment[] databases,

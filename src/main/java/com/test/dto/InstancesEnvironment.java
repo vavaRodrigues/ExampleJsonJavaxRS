@@ -32,6 +32,9 @@ public class InstancesEnvironment {
 	public void setFlavour(String flavour) {
 		this.flavour = flavour;
 	}
+	
+	public InstancesEnvironment() {
+	}
 
 	public InstancesEnvironment(Tags tags, Storages[] storages, String flavour) {
 		super();

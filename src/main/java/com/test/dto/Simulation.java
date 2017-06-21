@@ -113,6 +113,9 @@ public class Simulation {
 	public void setNumberOfDevices(String numberOfDevices) {
 		this.numberOfDevices = numberOfDevices;
 	}
+	
+	public Simulation() {
+	}
 
 	public Simulation(String billingType, String costAlert, String scalingType, String maxNumberOfDevices,
 			String additionalCapacity, String alertEnabled, Stages stages, String[] additionalCapacityDays,

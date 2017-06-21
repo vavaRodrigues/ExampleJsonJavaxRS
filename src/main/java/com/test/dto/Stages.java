@@ -11,6 +11,9 @@ public class Stages {
 		this.production = production;
 	}
 
+	public Stages() {
+	}
+	
 	public Stages(Production production) {
 		super();
 		this.production = production;

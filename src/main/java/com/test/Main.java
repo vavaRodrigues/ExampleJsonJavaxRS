@@ -6,7 +6,6 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jettison.json.JSONException;
 
 import com.test.dto.CreateEnvironmentDTO;
 import com.test.dto.CustomerCompany;
@@ -17,11 +16,8 @@ import com.test.dto.ProviderParams;
 import com.test.dto.Simulation;
 import com.test.dto.Stages;
 import com.test.dto.Storages;
-import com.test.dto.Tags;
 import com.test.dto.WarmUps;
 import com.test.dto.WorkingHoursEnvironment;
-import com.test.simulador.dto.Hours;
-import com.test.simulador.dto.Instances;
 import com.test.simulador.dto.Manifest;
 import com.test.simulador.dto.RampupHours;
 import com.test.simulador.dto.SimulationDTO;
@@ -199,23 +195,13 @@ public class Main {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		SimulationDTO simulation = null;
-		try {
-			simulation = mapper.readValue(json, SimulationDTO.class);
-		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException 	e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		simulation = mapper.readValue(json, SimulationDTO.class);
 		
 		CreateEnvironmentDTO createEnvironmentDTO = new CreateEnvironmentDTO();
 		createEnvironmentDTO.setProductId(simulation.getProduct().getId());
 		createEnvironmentDTO.setProductVersion(simulation.getProductVersion());
-		createEnvironmentDTO.setCustomerCompany(new CustomerCompany("federalId", "email", "corporateName"));
+		createEnvironmentDTO.setCustomerCompany(new CustomerCompany(simulation.getClient().getCnpj(), simulation.getClient().getEmail(), simulation.getClient().getName()));
+		createEnvironmentDTO.setProviderParams(new ProviderParams("envCreationDTO.getLanguage();"));
 		createEnvironmentDTO.setProviderParams(new ProviderParams("cloudAccountId"));
 		
 		String[] additionalCapacityDays = new String[1];
@@ -253,16 +239,33 @@ public class Main {
 				                              , databasesEnvironment
 				                              , instancesEnvironment);
 		
-		createEnvironmentDTO.setSimulation(new Simulation("billingType", "costAlert", "scalingType", "maxNumberOfDevices", "additionalCapacity", "alertEnabled", new Stages(production), additionalCapacityDays, "segmentFactorNumber", "numberOfDevices"));
+		
+		
+		Simulation simulationDTO = new Simulation("billingType"
+				                                  , "costAlert"
+				                                  , "scalingType"
+				                                  , simulation.getConnections()
+				                                  , "additionalCapacity"
+				                                  , "alertEnabled"
+				                                  , new Stages(production)
+				                                  , additionalCapacityDays
+				                                  , "segmentFactorNumber"
+				                                  , "numberOfDevices");
+		
+		
+		createEnvironmentDTO.setSimulation(simulationDTO);
 		
 		
 		System.out.println(createEnvironmentDTO.toString());
 		String jsonInString = mapper.writeValueAsString(createEnvironmentDTO);
-		System.out.println(jsonInString);
+		byte[] envCreationBody = jsonInString.getBytes();
+		System.out.println(envCreationBody);
 		
 		//System.out.println(simulation.toString());
 		//String jsonInString = mapper.writeValueAsString(simulation);
 		//System.out.println(jsonInString);
+		 
+		
 		
 		
 		

@@ -14,6 +14,9 @@ public class Tags {
 	public void setConfigurationType(String configurationType) {
 		this.configurationType = configurationType;
 	}
+	
+	public Tags() {
+	}
 
 	public Tags(String configurationType) {
 		super();

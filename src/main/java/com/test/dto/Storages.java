@@ -40,6 +40,9 @@ public class Storages {
 	public void setSize(String size) {
 		this.size = size;
 	}
+	
+	public Storages() {
+	}
 
 	public Storages(Tags tags, String additional, String type, String size) {
 		super();

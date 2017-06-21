@@ -66,6 +66,9 @@ public class WarmUps {
 	public void setDom(String[] dom) {
 		this.dom = dom;
 	}
+	
+	public WarmUps() {
+	}
 
 	public WarmUps(String[] seg, String[] ter, String[] qua, String[] qui, String[] sex, String[] sab, String[] dom) {
 		super();
