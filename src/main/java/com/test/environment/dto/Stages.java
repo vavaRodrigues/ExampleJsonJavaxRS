@@ -1,4 +1,4 @@
-package com.test.dto;
+package com.test.environment.dto;
 
 public class Stages {
 	private Production production;

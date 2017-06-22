@@ -1,4 +1,4 @@
-package com.test.dto;
+package com.test.environment.dto;
 
 import java.util.Arrays;
 
