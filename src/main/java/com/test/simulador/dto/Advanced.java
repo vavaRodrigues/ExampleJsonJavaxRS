@@ -1,7 +1,9 @@
 package com.test.simulador.dto;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Advanced {
 
 	@JsonProperty("pub_docs_average_month")
@@ -52,6 +54,15 @@ public class Advanced {
 
 	@JsonProperty("docs_qtt")
 	private String docsQtt;
+
+	@JsonProperty("software_integration")
+	private boolean softwareIntegration;
+
+	@JsonProperty("tss_at_installation")
+	private boolean tssAtInstallation;
+
+	@JsonProperty("protheus_data")
+	private int protheusData;
 
 	public String getPubDocsAverageMonth() {
 		return pubDocsAverageMonth;
@@ -189,6 +200,30 @@ public class Advanced {
 		this.docsQtt = docsQtt;
 	}
 
+	public boolean isSoftwareIntegration() {
+		return softwareIntegration;
+	}
+
+	public void setSoftwareIntegration(boolean softwareIntegration) {
+		this.softwareIntegration = softwareIntegration;
+	}
+
+	public boolean isTssAtInstallation() {
+		return tssAtInstallation;
+	}
+
+	public void setTssAtInstallation(boolean tssAtInstallation) {
+		this.tssAtInstallation = tssAtInstallation;
+	}
+
+	public int getProtheusData() {
+		return protheusData;
+	}
+
+	public void setProtheusData(int protheusData) {
+		this.protheusData = protheusData;
+	}
+
 	@Override
 	public String toString() {
 		return "Advanced [pubDocsAverageMonth=" + pubDocsAverageMonth + ", installedOperationalSystem="
@@ -199,7 +234,8 @@ public class Advanced {
 				+ ", databaseSize=" + databaseSize + ", product=" + product + ", email=" + email
 				+ ", pubDocsSizeAverage=" + pubDocsSizeAverage + ", devPagesQtt=" + devPagesQtt
 				+ ", communitiesPubAverage=" + communitiesPubAverage + ", workflowQtt=" + workflowQtt + ", docsQtt="
-				+ docsQtt + "]";
+				+ docsQtt + ", softwareIntegration=" + softwareIntegration + ", tssAtInstallation=" + tssAtInstallation
+				+ ", protheusData=" + protheusData + "]";
 	}
 
 }
