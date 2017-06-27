@@ -3,55 +3,39 @@ package com.test.environment.dto;
 import java.util.Arrays;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-@JsonAutoDetect(fieldVisibility=JsonAutoDetect.Visibility.ANY, getterVisibility=JsonAutoDetect.Visibility.NONE,
-setterVisibility=JsonAutoDetect.Visibility.NONE, creatorVisibility=JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, creatorVisibility = JsonAutoDetect.Visibility.NONE)
 public class Simulation {
-	@JsonProperty("billing_type")
-	private String billingType;
-
-	@JsonProperty("cost_alert")
-	private String costAlert;
-
 	@JsonProperty("scaling_type")
 	private String scalingType;
 
-	@JsonProperty("max_number_of_devices")
-	private String maxNumberOfDevices;
-
-	@JsonProperty("additional_capacity")
-	private String additionalCapacity;
+	@JsonProperty("billing_type")
+	private String billingType;
 
 	@JsonProperty("alert_enabled")
 	private String alertEnabled;
 
-	private Stages stages;
+	@JsonProperty("additional_capacity")
+	private int additionalCapacity;
 
 	@JsonProperty("additional_capacity_days")
 	private String[] additionalCapacityDays;
 
-	@JsonProperty("segment_factor_number")
-	private String segmentFactorNumber;
+	@JsonProperty("cost_alert")
+	private double costAlert;
+
+	@JsonProperty("max_number_of_devices")
+	private int maxNumberOfDevices;
 
 	@JsonProperty("number_of_devices")
-	private String numberOfDevices;
+	private int numberOfDevices;
 
-	public String getBillingType() {
-		return billingType;
-	}
+	@JsonProperty("segment_factor_number")
+	private int segmentFactorNumber;
 
-	public void setBillingType(String billingType) {
-		this.billingType = billingType;
-	}
-
-	public String getCostAlert() {
-		return costAlert;
-	}
-
-	public void setCostAlert(String costAlert) {
-		this.costAlert = costAlert;
-	}
+	private Stages stages;
 
 	public String getScalingType() {
 		return scalingType;
@@ -61,20 +45,12 @@ public class Simulation {
 		this.scalingType = scalingType;
 	}
 
-	public String getMaxNumberOfDevices() {
-		return maxNumberOfDevices;
+	public String getBillingType() {
+		return billingType;
 	}
 
-	public void setMaxNumberOfDevices(String maxNumberOfDevices) {
-		this.maxNumberOfDevices = maxNumberOfDevices;
-	}
-
-	public String getAdditionalCapacity() {
-		return additionalCapacity;
-	}
-
-	public void setAdditionalCapacity(String additionalCapacity) {
-		this.additionalCapacity = additionalCapacity;
+	public void setBillingType(String billingType) {
+		this.billingType = billingType;
 	}
 
 	public String getAlertEnabled() {
@@ -85,12 +61,12 @@ public class Simulation {
 		this.alertEnabled = alertEnabled;
 	}
 
-	public Stages getStages() {
-		return stages;
+	public int getAdditionalCapacity() {
+		return additionalCapacity;
 	}
 
-	public void setStages(Stages stages) {
-		this.stages = stages;
+	public void setAdditionalCapacity(int additionalCapacity) {
+		this.additionalCapacity = additionalCapacity;
 	}
 
 	public String[] getAdditionalCapacityDays() {
@@ -101,48 +77,72 @@ public class Simulation {
 		this.additionalCapacityDays = additionalCapacityDays;
 	}
 
-	public String getSegmentFactorNumber() {
-		return segmentFactorNumber;
+	public double getCostAlert() {
+		return costAlert;
 	}
 
-	public void setSegmentFactorNumber(String segmentFactorNumber) {
-		this.segmentFactorNumber = segmentFactorNumber;
+	public void setCostAlert(double costAlert) {
+		this.costAlert = costAlert;
 	}
 
-	public String getNumberOfDevices() {
+	public int getMaxNumberOfDevices() {
+		return maxNumberOfDevices;
+	}
+
+	public void setMaxNumberOfDevices(int maxNumberOfDevices) {
+		this.maxNumberOfDevices = maxNumberOfDevices;
+	}
+
+	public int getNumberOfDevices() {
 		return numberOfDevices;
 	}
 
-	public void setNumberOfDevices(String numberOfDevices) {
+	public void setNumberOfDevices(int numberOfDevices) {
 		this.numberOfDevices = numberOfDevices;
 	}
-	
+
+	public int getSegmentFactorNumber() {
+		return segmentFactorNumber;
+	}
+
+	public void setSegmentFactorNumber(int segmentFactorNumber) {
+		this.segmentFactorNumber = segmentFactorNumber;
+	}
+
+	public Stages getStages() {
+		return stages;
+	}
+
+	public void setStages(Stages stages) {
+		this.stages = stages;
+	}
+
 	public Simulation() {
 	}
 
-	public Simulation(String billingType, String costAlert, String scalingType, String maxNumberOfDevices,
-			String additionalCapacity, String alertEnabled, Stages stages, String[] additionalCapacityDays,
-			String segmentFactorNumber, String numberOfDevices) {
+	public Simulation(String scalingType, String billingType, String alertEnabled, int additionalCapacity,
+			String[] additionalCapacityDays, double costAlert, int maxNumberOfDevices, int numberOfDevices,
+			int segmentFactorNumber, Stages stages) {
 		super();
-		this.billingType = billingType;
-		this.costAlert = costAlert;
 		this.scalingType = scalingType;
-		this.maxNumberOfDevices = maxNumberOfDevices;
-		this.additionalCapacity = additionalCapacity;
+		this.billingType = billingType;
 		this.alertEnabled = alertEnabled;
-		this.stages = stages;
+		this.additionalCapacity = additionalCapacity;
 		this.additionalCapacityDays = additionalCapacityDays;
-		this.segmentFactorNumber = segmentFactorNumber;
+		this.costAlert = costAlert;
+		this.maxNumberOfDevices = maxNumberOfDevices;
 		this.numberOfDevices = numberOfDevices;
+		this.segmentFactorNumber = segmentFactorNumber;
+		this.stages = stages;
 	}
 
 	@Override
 	public String toString() {
-		return "Simulation [billingType=" + billingType + ", costAlert=" + costAlert + ", scalingType=" + scalingType
-				+ ", maxNumberOfDevices=" + maxNumberOfDevices + ", additionalCapacity=" + additionalCapacity
-				+ ", alertEnabled=" + alertEnabled + ", stages=" + stages + ", additionalCapacityDays="
-				+ Arrays.toString(additionalCapacityDays) + ", segmentFactorNumber=" + segmentFactorNumber
-				+ ", numberOfDevices=" + numberOfDevices + "]";
+		return "Simulation [scalingType=" + scalingType + ", billingType=" + billingType + ", alertEnabled="
+				+ alertEnabled + ", additionalCapacity=" + additionalCapacity + ", additionalCapacityDays="
+				+ Arrays.toString(additionalCapacityDays) + ", costAlert=" + costAlert + ", maxNumberOfDevices="
+				+ maxNumberOfDevices + ", numberOfDevices=" + numberOfDevices + ", segmentFactorNumber="
+				+ segmentFactorNumber + ", stages=" + stages + "]";
 	}
 
 }

@@ -1,60 +1,58 @@
 package com.test.environment.dto;
 
 public class Storages {
+
 	private Tags tags;
-
-	private String additional;
-
 	private String type;
-
-	private String size;
-
-	public Tags getTags() {
-		return tags;
-	}
+	private int size;
+	private boolean additional;
 
 	public void setTags(Tags tags) {
 		this.tags = tags;
 	}
 
-	public String getAdditional() {
-		return additional;
-	}
-
-	public void setAdditional(String additional) {
-		this.additional = additional;
-	}
-
-	public String getType() {
-		return type;
+	public Tags getTags() {
+		return tags;
 	}
 
 	public void setType(String type) {
 		this.type = type;
 	}
 
-	public String getSize() {
+	public String getType() {
+		return type;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public int getSize() {
 		return size;
 	}
 
-	public void setSize(String size) {
-		this.size = size;
-	}
-	
-	public Storages() {
+	public void setAdditional(boolean additional) {
+		this.additional = additional;
 	}
 
-	public Storages(Tags tags, String additional, String type, String size) {
-		super();
-		this.tags = tags;
-		this.additional = additional;
-		this.type = type;
-		this.size = size;
+	public boolean getAdditional() {
+		return additional;
 	}
 
 	@Override
 	public String toString() {
-		return "Storages [tags=" + tags + ", additional=" + additional + ", type=" + type + ", size=" + size + "]";
+		return "Storages [tags=" + tags + ", type=" + type + ", size=" + size + ", additional=" + additional + "]";
+	}
+
+	public Storages() {
+	}
+
+	public Storages(Tags tags, String type, int size, boolean additional) {
+		super();
+		this.tags = tags;
+		this.type = type;
+		this.size = size;
+		this.additional = additional;
 	}
 
 }

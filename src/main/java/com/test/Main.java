@@ -6,375 +6,263 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONException;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.test.environment.dto.CreateEnvironmentDTO;
 import com.test.environment.dto.CustomerCompany;
-import com.test.environment.dto.DatabasesEnvironment;
-import com.test.environment.dto.InstancesEnvironment;
-import com.test.environment.dto.Production;
+import com.test.environment.dto.ProductParams;
 import com.test.environment.dto.ProviderParams;
-import com.test.environment.dto.Simulation;
-import com.test.environment.dto.Stages;
-import com.test.environment.dto.Storages;
-import com.test.environment.dto.Tags;
-import com.test.environment.dto.WarmUps;
-import com.test.environment.dto.WorkingHoursEnvironment;
-import com.test.simulador.dto.RampupHours;
-import com.test.simulador.dto.SimulationDTO;
-import com.test.simulador.dto.WorkingHours;
 
 public class Main {
-	
-	
-	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException {
-		/*
-		String json = "{" +
-				"	\"id\": 6783," +
-				"	\"segment_factor_number\": 1.0," +
-				"	\"step\": 8," +
-				"	\"plan\": \"small\"," +
-				"	\"type\": \"on_demand\"," +
-				"	\"created_at\": \"2017-06-10T10:20:03.536Z\"," +
-				"	\"client\": {" +
-				"		\"name\": \"IGREJA UNIVERSAL DO REINO DE DEUS\"," +
-				"		\"t_code\": \"TEZOXW\"," +
-				"		\"type\": \"CLIENTE\"," +
-				"		\"category\": \"client\"," +
-				"		\"email\": \"MSOUSA@UNIVERSAL.ORG.BR\"," +
-				"		\"in_datacenter\": false," +
-				"		\"consultant\": {" +
-				"			\"t_code\": \"T12549\"," +
-				"			\"name\": \"MONICA BAZANI\"" +
-				"		}," +
-				"		\"cnpj\": \"29744778006802\"" +
-				"	}," +
-				"	\"install_type\": \"new\"," +
-				"	\"source_type\": null," +
-				"	\"modality\": \"variable\"," +
-				"	\"stages\": [\"production\"]," +
-				"	\"user\": {" +
-				"		\"category\": \"consultant\"" +
-				"	}," +
-				"	\"database\": {" +
-				"		\"name\": \"MySql\"," +
-				"		\"tag\": \"mysql\"" +
-				"	}," +
-				"	\"support\": {" +
-				"		\"name\": \"Serviço Gerenciado Padrão\"," +
-				"		\"tag\": \"standard_support\"" +
-				"	}," +
-				"	\"manifest\": [{" +
-				"		\"hardware\": {" +
-				"			\"core_instance\": [{" +
-				"				\"kind\": 2," +
-				"				\"ebses\": [{" +
-				"					\"size\": 20," +
-				"					\"device\": \"so\"," +
-				"					\"storage_type\": \"gp2\"" +
-				"				}, {" +
-				"					\"size\": 30," +
-				"					\"device\": \"/dev/sdf\"," +
-				"					\"storage_type\": \"gp2\"" +
-				"				}]," +
-				"				\"additional\": false" +
-				"			}]," +
-				"			\"core_instance_elastic\": []," +
-				"			\"core_service\": []," +
-				"			\"core_service_elastic\": []," +
-				"			\"in_transfer\": 30," +
-				"			\"out_transfer\": 30," +
-				"			\"transfer_public_ip_elastic_ip\": 30," +
-				"			\"load_balancer\": 30," +
-				"			\"databases\": [{" +
-				"				\"kind\": 1," +
-				"				\"database_id\": 3," +
-				"				\"size\": 25," +
-				"				\"backup\": {" +
-				"					\"size\": 25," +
-				"					\"interval\": 5" +
-				"				}" +
-				"			}]" +
-				"		}," +
-				"		\"stage\": \"production\"" +
-				"	}]," +
-				"	\"working_hours\": [{" +
-				"		\"hours\": {" +
-				"			\"sun\": []," +
-				"			\"mon\": [8, 18]," +
-				"			\"tue\": [8, 18]," +
-				"			\"wed\": [8, 18]," +
-				"			\"thu\": [8, 18]," +
-				"			\"fri\": [8, 18]," +
-				"			\"sat\": []" +
-				"		}," +
-				"		\"stage\": \"production\"" +
-				"	}]," +
-				"	\"rampup_hours\": [{" +
-				"		\"hours\": {" +
-				"			\"sun\": []," +
-				"			\"mon\": []," +
-				"			\"tue\": []," +
-				"			\"wed\": []," +
-				"			\"thu\": []," +
-				"			\"fri\": []," +
-				"			\"sat\": []" +
-				"		}," +
-				"		\"stage\": \"production\"" +
-				"	}]," +
-				"	\"expiration_date\": \"10/07/2017\"," +
-				"	\"product\": {" +
-				"		\"id\": 2," +
-				"		\"name\": \"fluig\"" +
-				"	}," +
-				"	\"product_version\": \"latest\"," +
-				"	\"provider\": {" +
-				"		\"name\": \"aws\"" +
-				"	}," +
-				"	\"services\": []," +
-				"	\"reviewable\": true," +
-				"	\"editable\": false," +
-				"	\"clonable\": true," +
-				"	\"in_use\": false," +
-				"	\"approved\": true," +
-				"	\"available\": true," +
-				"	\"current_status\": \"finished\"," +
-				"	\"connections\": 30," +
-				"	\"stats\": {" +
-				"		\"volume\": 50," +
-				"		\"database\": 25," +
-				"		\"backup\": 25," +
-				"		\"network_transfer\": 30" +
-				"	}," +
-				"	\"instances\": {" +
-				"		\"total\": 1," +
-				"		\"production\": 1," +
-				"		\"development\": 0," +
-				"		\"qa\": 0," +
-				"		\"additional\": 0," +
-				"		\"extra\": {" +
-				"			\"portal\": 0," +
-				"			\"total\": 0" +
-				"		}" +
-				"	}," +
-				"	\"contact\": {" +
-				"		\"name\": \"antonio\"," +
-				"		\"phone\": \"11975755667\"," +
-				"		\"email\": \"antonio.mariano@totvs.com.br\"" +
-				"	}," +
-				"	\"summary\": {" +
-				"		\"question\": null," +
-				"		\"additional_information\": null" +
-				"	}," +
-				"	\"predictability\": {" +
-				"		\"additional_load_limit\": false," +
-				"		\"additional_load\": 0," +
-				"		\"additional_days\": []," +
-				"		\"additional_load_alert_value\": 1.0," +
-				"		\"scheduled_additional_load\": false" +
-				"	}," +
-				"	\"advanced\": {" +
-				"		\"docs_qtt\": 0," +
-				"		\"pub_docs_average_month\": 0," +
-				"		\"pub_docs_size_average\": 0," +
-				"		\"workflow_qtt\": 0," +
-				"		\"proccess_init_average_month\": 0," +
-				"		\"pages_access_average\": 0," +
-				"		\"communities_qtt\": 0," +
-				"		\"communities_pub_average\": 0," +
-				"		\"email\": false," +
-				"		\"installed_operational_system\": \"\"," +
-				"		\"other_system_names\": \"\"," +
-				"		\"totvs_system_integration\": false," +
-				"		\"other_system_integration\": false," +
-				"		\"fluig_data\": 1," +
-				"		\"database_size\": 1," +
-				"		\"product\": \"fluig\"" +
-				"	}" +
-				"}";
+
+	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException,
+			JSONException {
+
+		
+		//create_environment();
 		
 		
-		ObjectMapper mapper = new ObjectMapper();
-		SimulationDTO simulation = null;
-		simulation = mapper.readValue(json, SimulationDTO.class);
-		
-		CreateEnvironmentDTO createEnvironmentDTO = new CreateEnvironmentDTO();
-		createEnvironmentDTO.setProductId(simulation.getProduct().getId());
-		createEnvironmentDTO.setProductVersion(simulation.getProductVersion());
-		createEnvironmentDTO.setCustomerCompany(new CustomerCompany(simulation.getClient().getCnpj(), simulation.getClient().getEmail(), simulation.getClient().getName()));
-		createEnvironmentDTO.setProviderParams(new ProviderParams("envCreationDTO.getLanguage();"));
-		createEnvironmentDTO.setProviderParams(new ProviderParams("cloudAccountId"));
-		
-		String[] additionalCapacityDays = new String[1];
- 		WorkingHours[] workingHours = simulation.getWorkingHours();
- 		RampupHours[] rampupHours = simulation.getRampupHours();
-		WorkingHoursEnvironment workingHoursEnvironment = new WorkingHoursEnvironment(workingHours[0].getHours().getWed()
-				                                                                       , workingHours[0].getHours().getFri()
-				                                                                       , workingHours[0].getHours().getMon()
-				                                                                       , workingHours[0].getHours().getSat()
-				                                                                       , workingHours[0].getHours().getSun()
-				                                                                       , workingHours[0].getHours().getThu()
-				                                                                       , workingHours[0].getHours().getTue());
-		
-		
-		WarmUps warmUps = new WarmUps(rampupHours[0].getHours().getMon()
-				                     , rampupHours[0].getHours().getTue()
-				                     , rampupHours[0].getHours().getWed()
-				                     , rampupHours[0].getHours().getThu()
-				                     , rampupHours[0].getHours().getFri()
-				                     , rampupHours[0].getHours().getSat()
-				                     , rampupHours[0].getHours().getSun());
-		
-		
-		DatabasesEnvironment[] databasesEnvironment = new DatabasesEnvironment[1];
-		databasesEnvironment[0] = new DatabasesEnvironment(new Tags("database"),"sqlserver","jis.database.medium_a","75");
-		
-		Storages[] storages = new Storages[1];
-		storages[0] = new Storages(new Tags("so"),"false","jis.storage.ssd_a","10");
-		InstancesEnvironment[] instancesEnvironment = new InstancesEnvironment[1];
-		instancesEnvironment[0] = new InstancesEnvironment(new Tags("core_instance"),storages,"jis.instance.medium_a");
-		
-		String[] scalingInstances = new String[1];
-		
-		Production production = new Production(workingHoursEnvironment
-				                              , "maxCoreInstanceElastic"
-				                              , "maxInstances"
-				                              , warmUps
-				                              , scalingInstances
-				                              , "maxCoreServiceElastic"
-				                              , databasesEnvironment
-				                              , instancesEnvironment);
-		
-		
-		
-		Simulation simulationDTO = new Simulation("billingType"
-				                                  , "costAlert"
-				                                  , "scalingType"
-				                                  , simulation.getConnections()
-				                                  , "additionalCapacity"
-				                                  , "alertEnabled"
-				                                  , new Stages(production)
-				                                  , additionalCapacityDays
-				                                  , "segmentFactorNumber"
-				                                  , "numberOfDevices");
-		
-		
-		createEnvironmentDTO.setSimulation(simulationDTO);
-		
-		
-		System.out.println("object: "+createEnvironmentDTO.toString());
-		String jsonInString = mapper.writeValueAsString(createEnvironmentDTO);
-		jsonInString.replaceFirst("product_id", "productId");
-		System.out.println("json: "+jsonInString);
-		byte[] envCreationBody = jsonInString.getBytes();
-		System.out.println("byte: "+envCreationBody);
-		
-		//System.out.println(simulation.toString());
-		//String jsonInString = mapper.writeValueAsString(simulation);
-		//System.out.println(jsonInString);
-		 
-		*/
-		
-		create_environment();
-		
+		String json = "{" + "    \"product_id\": \"1\"," + "    \"product_version\": \"12.1.014\","
+				+ "    \"provider_name\": \"totvs_cloud\"," + "    \"customer_company\": {"
+				+ "        \"federal_id\": \"432432432423432432\"," + "        \"corporate_name\": \"ADTSYS\","
+				+ "        \"email\": \"otoniel.isidoro@adtsys.com.br\"" + "    }," + "    \"product_params\": {"
+				+ "        \"language\": \"portuguese\"" + "    }," + "    \"provider_params\": {"
+				+ "        \"totvs_cloud_project_id\": \"c87527d7-1a91-44cb-985d-4d74110d6a68\"" + "    },"
+				+ "    \"simulation\": {" + "        \"id\": 6425," + "        \"segment_factor_number\": 1,"
+				+ "        \"step\": null," + "        \"plan\": null," + "        \"type\": \"intera\","
+				+ "        \"created_at\": \"2016-11-29T09:41:36.404Z\"," + "        \"client\": {"
+				+ "            \"name\": \"PHARMAINOX INDUSTRIA E COMERCIO DE EQUIPAMENTOS LTDA\","
+				+ "            \"t_code\": \"TEZNRH\"," + "            \"type\": \"CLIENTE\","
+				+ "            \"category\": \"client\"," + "            \"email\": \"PHARMAINOX@PHARMAINOX.COM.BR\","
+				+ "            \"in_datacenter\": false," + "            \"consultant\": {"
+				+ "                \"t_code\": \"T04027\"," + "                \"name\": \"LAIS DECRESCI\""
+				+ "            }," + "            \"cnpj\": \"07787590000193\"" + "        },"
+				+ "        \"install_type\": \"new\"," + "        \"source_type\": null,"
+				+ "        \"modality\": \"fixed\"," + "        \"stages\": [" + "            \"production\","
+				+ "            \"qa\"" + "        ]," + "        \"user\": {" + "            \"category\": null"
+				+ "        }," + "        \"database\": {" + "            \"name\": \"Microsoft SQL Server\","
+				+ "            \"tag\": \"sqlserver\"" + "        }," + "        \"support\": {"
+				+ "            \"name\": \"Serviço Gerenciado Padrão\"," + "            \"tag\": \"standard_support\""
+				+ "        }," + "        \"manifest\": [" + "            {" + "                \"hardware\": {"
+				+ "                    \"core_instance\": [" + "                        {"
+				+ "                            \"kind\": 1," + "                            \"ebses\": ["
+				+ "                                {" + "                                    \"size\": 20,"
+				+ "                                    \"device\": \"so\","
+				+ "                                    \"storage_type\": \"gp2\""
+				+ "                                }," + "                                {"
+				+ "                                    \"size\": 70,"
+				+ "                                    \"device\": \"/dev/sdf\","
+				+ "                                    \"storage_type\": \"gp2\"" + "                                }"
+				+ "                            ]," + "                            \"additional\": false"
+				+ "                        }" + "                    ],"
+				+ "                    \"core_instance_elastic\": []," + "                    \"core_service\": [],"
+				+ "                    \"core_service_elastic\": []," + "                    \"in_transfer\": 30,"
+				+ "                    \"out_transfer\": 30,"
+				+ "                    \"transfer_public_ip_elastic_ip\": 30,"
+				+ "                    \"load_balancer\": 30," + "                    \"databases\": ["
+				+ "                        {" + "                            \"kind\": 3,"
+				+ "                            \"database_id\": 1," + "                            \"size\": 75,"
+				+ "                            \"backup\": null" + "                        }"
+				+ "                    ]" + "                }," + "                \"stage\": \"qa\""
+				+ "            }," + "            {" + "                \"hardware\": {"
+				+ "                    \"core_instance\": [" + "                        {"
+				+ "                            \"kind\": 1," + "                            \"ebses\": ["
+				+ "                                {" + "                                    \"size\": 0,"
+				+ "                                    \"device\": \"so\","
+				+ "                                    \"storage_type\": \"gp2\""
+				+ "                                }," + "                                {"
+				+ "                                    \"size\": 70,"
+				+ "                                    \"device\": \"/dev/sdf\","
+				+ "                                    \"storage_type\": \"gp2\"" + "                                }"
+				+ "                            ]," + "                            \"additional\": false"
+				+ "                        }" + "                    ],"
+				+ "                    \"core_instance_elastic\": []," + "                    \"core_service\": [],"
+				+ "                    \"core_service_elastic\": []," + "                    \"in_transfer\": 50,"
+				+ "                    \"out_transfer\": 50,"
+				+ "                    \"transfer_public_ip_elastic_ip\": 50,"
+				+ "                    \"load_balancer\": 30," + "                    \"databases\": ["
+				+ "                        {" + "                            \"kind\": 3,"
+				+ "                            \"database_id\": 1," + "                            \"size\": 0,"
+				+ "                            \"backup\": {" + "                                \"size\": 0,"
+				+ "                                \"interval\": 5" + "                            }"
+				+ "                        }" + "                    ]" + "                },"
+				+ "                \"stage\": \"production\"" + "            }" + "        ],"
+				+ "        \"working_hours\": [" + "            {" + "                \"hours\": {"
+				+ "                    \"sun\": [" + "                        0," + "                        24"
+				+ "                    ]," + "                    \"mon\": [" + "                        0,"
+				+ "                        24" + "                    ]," + "                    \"tue\": ["
+				+ "                        0," + "                        24" + "                    ],"
+				+ "                    \"wed\": [" + "                        0," + "                        24"
+				+ "                    ]," + "                    \"thu\": [" + "                        0,"
+				+ "                        24" + "                    ]," + "                    \"fri\": ["
+				+ "                        0," + "                        24" + "                    ],"
+				+ "                    \"sat\": [" + "                        0," + "                        24"
+				+ "                    ]" + "                }," + "                \"stage\": \"qa\""
+				+ "            }," + "            {" + "                \"hours\": {"
+				+ "                    \"sun\": [" + "                        0," + "                        24"
+				+ "                    ]," + "                    \"mon\": [" + "                        0,"
+				+ "                        24" + "                    ]," + "                    \"tue\": ["
+				+ "                        0," + "                        24" + "                    ],"
+				+ "                    \"wed\": [" + "                        0," + "                        24"
+				+ "                    ]," + "                    \"thu\": [" + "                        0,"
+				+ "                        24" + "                    ]," + "                    \"fri\": ["
+				+ "                        0," + "                        24" + "                    ],"
+				+ "                    \"sat\": [" + "                        0," + "                        24"
+				+ "                    ]" + "                }," + "                \"stage\": \"production\""
+				+ "            }" + "        ]," + "        \"rampup_hours\": [" + "            {"
+				+ "                \"hours\": {" + "                    \"sun\": [],"
+				+ "                    \"mon\": []," + "                    \"tue\": [],"
+				+ "                    \"wed\": []," + "                    \"thu\": [],"
+				+ "                    \"fri\": []," + "                    \"sat\": []" + "                },"
+				+ "                \"stage\": \"qa\"" + "            }," + "            {"
+				+ "                \"hours\": {" + "                    \"sun\": [],"
+				+ "                    \"mon\": []," + "                    \"tue\": [],"
+				+ "                    \"wed\": []," + "                    \"thu\": [],"
+				+ "                    \"fri\": []," + "                    \"sat\": []" + "                },"
+				+ "                \"stage\": \"production\"" + "            }" + "        ],"
+				+ "        \"expiration_date\": \"29/12/2016\"," + "        \"product\": {" + "            \"id\": 1,"
+				+ "            \"name\": \"protheus\"" + "        }," + "        \"product_version\": \"12.1.007\","
+				+ "        \"provider\": {" + "            \"name\": \"totvs_cloud\"" + "        },"
+				+ "        \"services\": []," + "        \"reviewable\": false," + "        \"editable\": false,"
+				+ "        \"clonable\": true," + "        \"in_use\": false," + "        \"approved\": true,"
+				+ "        \"available\": true," + "        \"current_status\": \"expired\","
+				+ "        \"connections\": 1," + "        \"stats\": {" + "            \"volume\": 90,"
+				+ "            \"database\": 75," + "            \"backup\": 75,"
+				+ "            \"network_transfer\": 30" + "        }," + "        \"instances\": {"
+				+ "            \"total\": 2," + "            \"production\": 1," + "            \"development\": 0,"
+				+ "            \"qa\": 1," + "            \"additional\": 0," + "            \"extra\": {"
+				+ "                \"portal\": 0," + "                \"total\": 0" + "            }" + "        },"
+				+ "        \"contact\": {" + "            \"name\": null," + "            \"phone\": null,"
+				+ "            \"email\": null" + "        }," + "        \"summary\": {"
+				+ "            \"question\": null," + "            \"additional_information\": null" + "        },"
+				+ "        \"predictability\": {" + "            \"additional_load_limit\": false,"
+				+ "            \"additional_load\": 0," + "            \"additional_days\": [],"
+				+ "            \"additional_load_alert_value\": 1,"
+				+ "            \"scheduled_additional_load\": false" + "        }," + "        \"advanced\": {"
+				+ "            \"software_integration\": false," + "            \"tss_at_installation\": false,"
+				+ "            \"protheus_data\": 1," + "            \"database_size\": 1,"
+				+ "            \"product\": \"protheus\"" + "        }" + "    }" + "}";
+
+		JsonParser jsonParser = new JsonParser();
+		JsonObject jsonArray = (JsonObject) jsonParser.parse(json);
+
+		CreateEnvironmentDTO createEnvironmentDTO = new CreateEnvironmentDTO(
+				"Integer.toString(simulador.getProduct().getId())", "productVersion", "totvs_cloud",
+				new CustomerCompany("simulador.getClient().getCnpj()", "simulador.getClient().getEmail()",
+						"simulador.getClient().getName()"), new ProductParams("language"), new ProviderParams(
+						"cloudAccountId"), jsonArray);
+
+		Gson gson = new Gson();
+
+		System.out.println(gson.toJson(createEnvironmentDTO));
 
 	}
 
 	private static void create_environment() throws IOException, JsonParseException, JsonMappingException,
 			JsonGenerationException {
-		String json = "{" +
-				"    \"product_id\" : \"1\"," +
-				"    \"product_version\" : \"12.1.007\"," +
-				"    \"provider_name\": \"totvs_cloud\"," +
-				"    \"customer_company\" : {" +
-				"        \"federal_id\": \"federal\"," +
-				"        \"corporate_name\": \"name\"," +
-				"        \"email\" : \"email\"" +
-				"    }," +
-				"    \"product_params\": {" +
-				"      \"language\": \"portuguese\"" +
-				"    }," +
-				"    \"provider_params\": {" +
-				"      \"totvs_cloud_project_id\": \"project_id\"" +
-				"    }," +
-				"    \"simulation\": {" +
-				"      \"scaling_type\": \"fixed\"," +
-				"      \"billing_type\": \"default\"," +
-				"      \"alert_enabled\": \"informed\"," +
-				"      \"additional_capacity\": 50," +
-				"      \"additional_capacity_days\": []," +
-				"      \"cost_alert\": 0.0," +
-				"      \"max_number_of_devices\": 20," +
-				"      \"number_of_devices\": 120," +
-				"      \"segment_factor_number\": 1," +
-				"      \"stages\": {" +
-				"       \"production\": {" +
-				"          \"max_instances\": 1," +
-				"          \"max_core_instance_elastic\": 3," +
-				"          \"max_core_service_elastic\": 0," +
-				"          \"databases\": [" +
-				"            {" +
-				"              \"tags\": {" +
-				"                \"configuration_type\": \"database\"" +
-				"              }," +
-				"              \"flavour\": \"jis.database.medium_a\"," +
-				"              \"engine\": \"sqlserver\"," +
-				"              \"storage_size\": 75" +
-				"            }" +
-				"          ]," +
-				"          \"instances\": [" +
-				"            {" +
-				"              \"tags\": {" +
-				"                \"configuration_type\": \"core_instance\"" +
-				"              }," +
-				"             \"flavour\": \"jis.instance.medium_a\"," +
-				"             \"storages\": [" +
-				"                {" +
-				"                  \"tags\": {" +
-				"                    \"configuration_type\": \"so\"" +
-				"                  }," +
-				"                  \"type\": \"jis.storage.ssd_a\"," +
-				"                  \"size\": 10," +
-				"                  \"additional\": false" +
-				"                }," +
-				"                {" +
-				"                  \"tags\": {" +
-				"                    \"configuration_type\": \"additional\"" +
-				"                  }," +
-				"                  \"type\": \"jis.storage.ssd_a\"," +
-				"                  \"size\": 70," +
-				"                  \"additional\": true" +
-				"                }" +
-				"              ]" +
-				"            }" +
-				"          ]," +
-				"          \"scaling_instances\": []," +
-				"          \"working_hours\": {" +
-				"            \"seg\": [0, 23], \"ter\": [0, 23], \"qua\": [0, 23], \"qui\": [0, 23], \"sex\": [0, 23], \"sab\": [0, 23], \"dom\": [0, 23]" +
-				"          }," +
-				"          \"warm_ups\": {" +
-				"            \"seg\": [0, 1]," +
-				"            \"ter\": [0, 1, 2]," +
-				"            \"qua\": []," +
-				"            \"qui\": []," +
-				"            \"sex\": []," +
-				"            \"sab\": []," +
-				"            \"dom\": []" +
-				"          }" +
-				"        }" +
-				"      }" +
-				"    }" +
-				"  }";
-		
+
+		String json = "{" + "    \"product_id\": \"2\"," + "    \"product_version\": \"productVersion\","
+				+ "    \"provider_name\": \"totvs_cloud\"," + "    \"customer_company\": {"
+				+ "        \"federal_id\": \"29744778006802\","
+				+ "        \"corporate_name\": \"MSOUSA@UNIVERSAL.ORG.BR\","
+				+ "        \"email\": \"IGREJA UNIVERSAL DO REINO DE DEUS\"" + "    }," + "    \"product_params\": {"
+				+ "        \"language\": \"language\"" + "    }," + "    \"provider_params\": {"
+				+ "        \"totvs_cloud_project_id\": \"cloudAccountId\"" + "    }," + "    \"simulation\": {"
+				+ "        \"scaling_type\": \"fixed\"," + "        \"billing_type\": \"default\","
+				+ "        \"alert_enabled\": \"informed\"," + "        \"additional_capacity\": 50,"
+				+ "        \"additional_capacity_days\": []," + "        \"cost_alert\": 0,"
+				+ "        \"max_number_of_devices\": 30," + "        \"number_of_devices\": 130,"
+				+ "        \"segment_factor_number\": 1," + "        \"stages\": {" + "            \"production\": {"
+				+ "                \"max_instances\": 1," + "                \"max_core_instance_elastic\": 0,"
+				+ "                \"max_core_service_elastic\": 0," + "                \"databases\": ["
+				+ "                    {" + "                        \"tags\": {"
+				+ "                            \"configuration_type\": \"database\"" + "                        },"
+				+ "                        \"flavour\": \"jis.database.medium_a\","
+				+ "                        \"engine\": \"sqlserver\"," + "                        \"storage_size\": 75"
+				+ "                    }" + "                ]," + "                \"instances\": ["
+				+ "                    {" + "                        \"tags\": {"
+				+ "                            \"configuration_type\": \"core_instance\""
+				+ "                        }," + "                        \"flavour\": \"jis.instance.medium_a\","
+				+ "                        \"storages\": [" + "                            {"
+				+ "                                \"tags\": {"
+				+ "                                    \"configuration_type\": \"so\""
+				+ "                                },"
+				+ "                                \"type\": \"jis.storage.ssd_a\","
+				+ "                                \"size\": 10,"
+				+ "                                \"additional\": false" + "                            },"
+				+ "                            {" + "                                \"tags\": {"
+				+ "                                    \"configuration_type\": \"additional\""
+				+ "                                },"
+				+ "                                \"type\": \"jis.storage.ssd_a\","
+				+ "                                \"size\": 70,"
+				+ "                                \"additional\": true" + "                            }"
+				+ "                        ]" + "                    }" + "                ],"
+				+ "                \"scaling_instances\": []," + "                \"working_hours\": {"
+				+ "                    \"seg\": [" + "                        0," + "                        23"
+				+ "                    ]," + "                    \"ter\": [" + "                        0,"
+				+ "                        23" + "                    ]," + "                    \"qua\": ["
+				+ "                        0," + "                        23" + "                    ],"
+				+ "                    \"qui\": [" + "                        0," + "                        23"
+				+ "                    ]," + "                    \"sex\": [" + "                        0,"
+				+ "                        23" + "                    ]," + "                    \"sab\": ["
+				+ "                        0," + "                        23" + "                    ],"
+				+ "                    \"dom\": [" + "                        0," + "                        23"
+				+ "                    ]" + "                }," + "                \"warm_ups\": {"
+				+ "                    \"seg\": []," + "                    \"ter\": [],"
+				+ "                    \"qua\": []," + "                    \"qui\": [],"
+				+ "                    \"sex\": []," + "                    \"sab\": [],"
+				+ "                    \"dom\": []" + "                }" + "            }," + "            \"qa\": {"
+				+ "                \"max_instances\": 1," + "                \"max_core_instance_elastic\": 0,"
+				+ "                \"max_core_service_elastic\": 0," + "                \"databases\": ["
+				+ "                    {" + "                        \"tags\": {"
+				+ "                            \"configuration_type\": \"database\"" + "                        },"
+				+ "                        \"flavour\": \"jis.database.medium_a\","
+				+ "                        \"engine\": \"sqlserver\"," + "                        \"storage_size\": 75"
+				+ "                    }" + "                ]," + "                \"instances\": ["
+				+ "                    {" + "                        \"tags\": {"
+				+ "                            \"configuration_type\": \"core_instance\""
+				+ "                        }," + "                        \"flavour\": \"jis.instance.medium_a\","
+				+ "                        \"storages\": [" + "                            {"
+				+ "                                \"tags\": {"
+				+ "                                    \"configuration_type\": \"so\""
+				+ "                                },"
+				+ "                                \"type\": \"jis.storage.ssd_a\","
+				+ "                                \"size\": 10,"
+				+ "                                \"additional\": false" + "                            },"
+				+ "                            {" + "                                \"tags\": {"
+				+ "                                    \"configuration_type\": \"additional\""
+				+ "                                },"
+				+ "                                \"type\": \"jis.storage.ssd_a\","
+				+ "                                \"size\": 70,"
+				+ "                                \"additional\": true" + "                            }"
+				+ "                        ]" + "                    }" + "                ],"
+				+ "                \"scaling_instances\": []," + "                \"working_hours\": {"
+				+ "                    \"seg\": [" + "                        0," + "                        23"
+				+ "                    ]," + "                    \"ter\": [" + "                        0,"
+				+ "                        23" + "                    ]," + "                    \"qua\": ["
+				+ "                        0," + "                        23" + "                    ],"
+				+ "                    \"qui\": [" + "                        0," + "                        23"
+				+ "                    ]," + "                    \"sex\": [" + "                        0,"
+				+ "                        23" + "                    ]," + "                    \"sab\": ["
+				+ "                        0," + "                        23" + "                    ],"
+				+ "                    \"dom\": [" + "                        0," + "                        23"
+				+ "                    ]" + "                }," + "                \"warm_ups\": {"
+				+ "                    \"seg\": []," + "                    \"ter\": [],"
+				+ "                    \"qua\": []," + "                    \"qui\": [],"
+				+ "                    \"sex\": []," + "                    \"sab\": [],"
+				+ "                    \"dom\": []" + "                }" + "            }" + "        }" + "    }"
+				+ "}";
+
 		ObjectMapper mapper = new ObjectMapper();
 		CreateEnvironmentDTO environment = mapper.readValue(json, CreateEnvironmentDTO.class);
-		
-		
+
 		System.out.println(environment.toString());
-		
+
 		String jsonInString = mapper.writeValueAsString(environment);
 
-		
-		
 		System.out.println(jsonInString);
 	}
 

@@ -1,6 +1,5 @@
 package com.test.environment.dto;
 
-
 public class ProductParams {
 	private String language;
 
@@ -9,6 +8,15 @@ public class ProductParams {
 	}
 
 	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public ProductParams() {
+
+	}
+
+	public ProductParams(String language) {
+		super();
 		this.language = language;
 	}
 

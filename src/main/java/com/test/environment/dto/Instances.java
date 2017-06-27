@@ -2,12 +2,10 @@ package com.test.environment.dto;
 
 import java.util.Arrays;
 
-public class InstancesEnvironment {
+public class Instances {
 	private Tags tags;
-
-	private Storages[] storages;
-
 	private String flavour;
+	private Storages[] storages;
 
 	public Tags getTags() {
 		return tags;
@@ -15,6 +13,14 @@ public class InstancesEnvironment {
 
 	public void setTags(Tags tags) {
 		this.tags = tags;
+	}
+
+	public String getFlavour() {
+		return flavour;
+	}
+
+	public void setFlavour(String flavour) {
+		this.flavour = flavour;
 	}
 
 	public Storages[] getStorages() {
@@ -25,27 +31,21 @@ public class InstancesEnvironment {
 		this.storages = storages;
 	}
 
-	public String getFlavour() {
-		return flavour;
+	public Instances() {
+
 	}
 
-	public void setFlavour(String flavour) {
-		this.flavour = flavour;
-	}
-	
-	public InstancesEnvironment() {
-	}
-
-	public InstancesEnvironment(Tags tags, Storages[] storages, String flavour) {
+	public Instances(Tags tags, String flavour, Storages[] storages) {
 		super();
 		this.tags = tags;
-		this.storages = storages;
 		this.flavour = flavour;
+		this.storages = storages;
 	}
 
 	@Override
 	public String toString() {
-		return "Instances [tags=" + tags + ", storages=" + Arrays.toString(storages) + ", flavour=" + flavour + "]";
+		return "InstancesEnvironment [tags=" + tags + ", flavour=" + flavour + ", storages="
+				+ Arrays.toString(storages) + "]";
 	}
 
 }

@@ -2,7 +2,7 @@ package com.test.environment.dto;
 
 import java.util.Arrays;
 
-public class WorkingHoursEnvironment {
+public class WorkingHours {
 	private String[] qua;
 
 	private String[] sex;
@@ -73,10 +73,10 @@ public class WorkingHoursEnvironment {
 		this.ter = ter;
 	}
 	
-	public WorkingHoursEnvironment() {
+	public WorkingHours() {
 	}
 	
-	public WorkingHoursEnvironment(String[] qua, String[] sex, String[] seg, String[] sab, String[] dom, String[] qui,
+	public WorkingHours(String[] qua, String[] sex, String[] seg, String[] sab, String[] dom, String[] qui,
 			String[] ter) {
 		super();
 		this.qua = qua;

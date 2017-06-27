@@ -2,11 +2,11 @@ package com.test.environment.dto;
 
 import java.util.Arrays;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, creatorVisibility = JsonAutoDetect.Visibility.NONE)
-public class Production {
+import com.test.simulador.dto.WorkingHours;
+
+public class Development {
 
 	@JsonProperty("max_instances")
 	private int maxInstances;
@@ -87,22 +87,10 @@ public class Production {
 		this.warmUps = warmUps;
 	}
 
-	public Production() {
+	public Development() {
 	}
 
-	public Production(int maxInstances, int maxCoreInstanceElastic, int maxCoreServiceElastic, Databases[] databases,
-			Instances[] instances, WorkingHours workingHours, WarmUps warmUps) {
-		super();
-		this.maxInstances = maxInstances;
-		this.maxCoreInstanceElastic = maxCoreInstanceElastic;
-		this.maxCoreServiceElastic = maxCoreServiceElastic;
-		this.databases = databases;
-		this.instances = instances;
-		this.workingHours = workingHours;
-		this.warmUps = warmUps;
-	}
-
-	public Production(int maxInstances, int maxCoreInstanceElastic, int maxCoreServiceElastic, Databases[] databases,
+	public Development(int maxInstances, int maxCoreInstanceElastic, int maxCoreServiceElastic, Databases[] databases,
 			Instances[] instances, ScalingInstances[] scalingInstances, WorkingHours workingHours, WarmUps warmUps) {
 		super();
 		this.maxInstances = maxInstances;
@@ -117,7 +105,7 @@ public class Production {
 
 	@Override
 	public String toString() {
-		return "Production [maxInstances=" + maxInstances + ", maxCoreInstanceElastic=" + maxCoreInstanceElastic
+		return "Development [maxInstances=" + maxInstances + ", maxCoreInstanceElastic=" + maxCoreInstanceElastic
 				+ ", maxCoreServiceElastic=" + maxCoreServiceElastic + ", databases=" + Arrays.toString(databases)
 				+ ", instances=" + Arrays.toString(instances) + ", scalingInstances="
 				+ Arrays.toString(scalingInstances) + ", workingHours=" + workingHours + ", warmUps=" + warmUps + "]";
