@@ -7,6 +7,7 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jettison.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
@@ -22,8 +23,215 @@ public class Main {
 
 	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException,
 			JSONException, org.json.JSONException {
-
+		String json = "{\n" + 
+				"    \"simulation\": {\n" + 
+				"        \"scaling_type\": \"fixed\",\n" + 
+				"        \"billing_type\": \"intera\",\n" + 
+				"        \"alert_enabled\": 0,\n" + 
+				"        \"additional_capacity\": 0,\n" + 
+				"        \"additional_capacity_days\": [],\n" + 
+				"        \"cost_alert\": 0,\n" + 
+				"        \"max_number_of_devices\": 1,\n" + 
+				"        \"number_of_devices\": 1,\n" + 
+				"        \"segment_factor_number\": 1,\n" + 
+				"        \"stages\": {\n" + 
+				"            \"development\": {\n" + 
+				"                \"max_instances\": 8,\n" + 
+				"                \"max_core_instance_elastic\": 0,\n" + 
+				"                \"max_core_service_elastic\": 0,\n" + 
+				"                \"databases\": [\n" + 
+				"                    {\n" + 
+				"                        \"tags\": {\n" + 
+				"                            \"configuration_type\": \"database\"\n" + 
+				"                        },\n" + 
+				"                        \"flavour\": \"jis.database.micro_b\",\n" + 
+				"                        \"engine\": \"Microsoft SQL Server\",\n" + 
+				"                        \"storage_size\": 50\n" + 
+				"                    }\n" + 
+				"                ],\n" + 
+				"                \"instances\": [\n" + 
+				"                    {\n" + 
+				"                        \"tags\": {\n" + 
+				"                            \"configuration_type\": \"core_instance\"\n" + 
+				"                        },\n" + 
+				"                        \"flavour\": \"jis.instance.small_a\",\n" + 
+				"                        \"storages\": [\n" + 
+				"                            {\n" + 
+				"                                \"tags\": {\n" + 
+				"                                    \"configuration_type\": \"so\"\n" + 
+				"                                },\n" + 
+				"                                \"type\": \"gp2\",\n" + 
+				"                                \"size\": 50,\n" + 
+				"                                \"additional\": false\n" + 
+				"                            },\n" + 
+				"                            {\n" + 
+				"                                \"tags\": {\n" + 
+				"                                    \"configuration_type\": \"/dev/sdf\"\n" + 
+				"                                },\n" + 
+				"                                \"type\": \"gp2\",\n" + 
+				"                                \"size\": 70,\n" + 
+				"                                \"additional\": false\n" + 
+				"                            }\n" + 
+				"                        ]\n" + 
+				"                    }\n" + 
+				"                ],\n" + 
+				"                \"scaling_instances\": [],\n" + 
+				"                \"working_hours\": {\n" + 
+				"                    \"sun\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"mon\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"tue\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"wed\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"thu\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"fri\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"sat\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ]\n" + 
+				"                },\n" + 
+				"                \"warm_ups\": {\n" + 
+				"                    \"sun\": [],\n" + 
+				"                    \"mon\": [],\n" + 
+				"                    \"tue\": [],\n" + 
+				"                    \"wed\": [],\n" + 
+				"                    \"thu\": [],\n" + 
+				"                    \"fri\": [],\n" + 
+				"                    \"sat\": []\n" + 
+				"                }\n" + 
+				"            },\n" + 
+				"            \"production\": {\n" + 
+				"                \"max_instances\": 8,\n" + 
+				"                \"max_core_instance_elastic\": 0,\n" + 
+				"                \"max_core_service_elastic\": 0,\n" + 
+				"                \"databases\": [\n" + 
+				"                    {\n" + 
+				"                        \"tags\": {\n" + 
+				"                            \"configuration_type\": \"database\"\n" + 
+				"                        },\n" + 
+				"                        \"flavour\": \"jis.database.micro_b\",\n" + 
+				"                        \"engine\": \"Microsoft SQL Server\",\n" + 
+				"                        \"storage_size\": 50\n" + 
+				"                    }\n" + 
+				"                ],\n" + 
+				"                \"instances\": [\n" + 
+				"                    {\n" + 
+				"                        \"tags\": {\n" + 
+				"                            \"configuration_type\": \"core_instance\"\n" + 
+				"                        },\n" + 
+				"                        \"flavour\": \"jis.instance.medium_a\",\n" + 
+				"                        \"storages\": [\n" + 
+				"                            {\n" + 
+				"                                \"tags\": {\n" + 
+				"                                    \"configuration_type\": \"so\"\n" + 
+				"                                },\n" + 
+				"                                \"type\": \"gp2\",\n" + 
+				"                                \"size\": 50,\n" + 
+				"                                \"additional\": false\n" + 
+				"                            },\n" + 
+				"                            {\n" + 
+				"                                \"tags\": {\n" + 
+				"                                    \"configuration_type\": \"/dev/sdf\"\n" + 
+				"                                },\n" + 
+				"                                \"type\": \"gp2\",\n" + 
+				"                                \"size\": 70,\n" + 
+				"                                \"additional\": false\n" + 
+				"                            }\n" + 
+				"                        ]\n" + 
+				"                    }\n" + 
+				"                ],\n" + 
+				"                \"scaling_instances\": [],\n" + 
+				"                \"working_hours\": {\n" + 
+				"                    \"sun\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"mon\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"tue\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"wed\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"thu\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"fri\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ],\n" + 
+				"                    \"sat\": [\n" + 
+				"                        0,\n" + 
+				"                        0\n" + 
+				"                    ]\n" + 
+				"                },\n" + 
+				"                \"warm_ups\": {\n" + 
+				"                    \"sun\": [],\n" + 
+				"                    \"mon\": [],\n" + 
+				"                    \"tue\": [],\n" + 
+				"                    \"wed\": [],\n" + 
+				"                    \"thu\": [],\n" + 
+				"                    \"fri\": [],\n" + 
+				"                    \"sat\": []\n" + 
+				"                }\n" + 
+				"            }\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"}";
+		
+		
+		JSONObject jsonObj = new JSONObject(json);
+		String stages = jsonObj.getJSONObject("simulation").getString("stages");
+		JSONObject jsonObjStages = new JSONObject(stages);
+		String instance = jsonObjStages.getJSONObject("development").getString("instances");
+		JSONArray jsonArrayInstances = new JSONArray(instance);
+		
+		JSONObject jsonObjectInstance = jsonArrayInstances.getJSONObject(0);
+		jsonObjectInstance.put("image_id", "ami-e213888e");
+		System.out.println(jsonObjectInstance);
+		//jsonObjInstances.append("image_id", "3680d8fc-47dd-4474-8cc8-e884d9637dd2");
+		
+		//System.out.println(jsonObjInstances);
+		
+		
+		//JsonParser jsonParser = new JsonParser();
+		//JsonObject jsonArray = (JsonObject) jsonParser.parse(json);
+		//JsonElement jsonElement =  jsonArray.get("simulation");
+		//jsonArray.addProperty("teste", "teste");
+		
+		//System.out.println(jsonArray.getAsJsonObject("simulation").getAsJsonArray("stages"));
+		
+		//JsonElement jsonElement =  jsonArray.get("stages");
+		
+		//System.out.println(jsonElement.toString());
 	
+		
+
+	}
+
+	private static void simulationb() {
 		String json = "{\n" + 
 				"    \"simulation\": {\n" + 
 				"        \"scaling_type\": \"fixed\",\n" + 
@@ -239,7 +447,6 @@ public class Main {
 				   
 		
 		System.out.println(jsonInString);
-
 	}
 
 	private static void create_environment() throws IOException, JsonParseException, JsonMappingException,
@@ -625,7 +832,6 @@ public class Main {
 		
 		
 		JSONObject jsonObj = new JSONObject(simulationComplete);
-		
 		//JSONObject jsonObj = new JSONObject(simulationComplete);
 		ObjectMapper mapper = new ObjectMapper();
 		
